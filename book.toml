@@ -1,0 +1,5 @@
+[book]
+authors = ["Yannik Daellenbach"]
+language = "de"
+src = "src"
+title = "Cluster API Kurs"
