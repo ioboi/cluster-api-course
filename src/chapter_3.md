@@ -15,15 +15,15 @@ Installiere folgende Tools:
 
 ```bash
 cat > kind-cluster-with-extramounts.yaml <<EOF
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
+kind: "Cluster"
+apiVersion: "kind.x-k8s.io/v1alpha4"
 networking:
-  ipFamily: dual
+  ipFamily: "dual"
 nodes:
-- role: control-plane
+- role: "control-plane"
   extraMounts:
-    - hostPath: /var/run/docker.sock
-      containerPath: /var/run/docker.sock
+    - hostPath: "/var/run/docker.sock"
+      containerPath: "/var/run/docker.sock"
 EOF
 ```
 
