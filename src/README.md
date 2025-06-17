@@ -1,5 +1,7 @@
 # Cluster API Kurs
 
+> Dieser Kurs basiert auf dem offiziellen [The Cluster API Book](https://cluster-api.sigs.k8s.io).
+
 ## 🗓️ Tag 1 – Grundlagen & Einstieg
 
 ### 🕗 08:10–09:45
