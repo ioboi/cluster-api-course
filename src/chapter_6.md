@@ -15,7 +15,7 @@ Speichere die kubeconfig lokal:
 
 ```bash
 kubectl get secret my-cluster-kubeconfig \
-  -o jsonpath='{.data.value}' | base64 -d > kubeconfig-workload
+  -o template='{{.data.value | base64decode}}' >kubeconfig-workload
 ```
 
 > Alternativ: `clusterctl get kubeconfig my-cluster > kubeconfig-workload`
