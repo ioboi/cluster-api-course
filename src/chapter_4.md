@@ -8,9 +8,6 @@ ist ein Infrastruktur-Provider für Cluster API. Er nutzt Docker-Container als M
 ## 🚀 Initialisieren
 
 ```bash
-# Cluster Topology aktivieren
-export CLUSTER_TOPOLOGY=true
-
 # CAPD installieren
 clusterctl init --infrastructure docker
 ```
