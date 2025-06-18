@@ -14,6 +14,12 @@ Bitte stellt euch kurz vor:
 
 <!-- end_slide -->
 
+# Unterlagen
+
+![image:width:80%](./images/book.png)
+
+<!-- end_slide -->
+
 # Was ist die Cluster API?
 
 <!-- column_layout: [2, 1] -->
