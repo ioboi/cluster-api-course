@@ -125,14 +125,16 @@ graph TD
 
 # Custom Resources (CRDs)
 
-| CRD                   | Zweck                              |
-| --------------------- | ---------------------------------- |
-| **Cluster**           | Definiert einen Kubernetes-Cluster |
-| **Machine**           | Definiert einen Node               |
-| **MachineSet**        | Wie ReplicaSet für Maschinen       |
-| **MachineDeployment** | Wie Deployment für Maschinen       |
-| **ControlPlane**      | Verwaltet Control-Plane-Maschinen  |
-| **BootstrapConfig**   | Konfiguration für Node-Setup       |
+| CRD                       | Zweck                                  |
+| ------------------------- | -------------------------------------- |
+| **Cluster**               | Definiert einen Kubernetes-Cluster     |
+| **Machine**               | Definiert einen Node                   |
+| **MachineSet**            | Wie ReplicaSet für Maschinen           |
+| **MachineDeployment**     | Wie Deployment für Maschinen           |
+| **ControlPlane**          | Verwaltet Control-Plane-Maschinen      |
+| **BootstrapConfig**       | Konfiguration für Node-Setup           |
+| **InfrastructureCluster** | Provider-spezifisch (z.B. AWS, Docker) |
+| **InfrastructureMachine** | Provider-spezifische Maschine          |
 
 <!-- end_slide -->
 
