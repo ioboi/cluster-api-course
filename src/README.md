@@ -12,8 +12,6 @@
 - **Lektion 2**: Architektur & Motivation
   _Historie (kubeadm), Probleme klassischer Cluster-Verwaltung, Lifecycle-Vergleich_
 
----
-
 ### 🕥 10:15–11:50
 
 - **Lektion 3**: Lokales Setup gemeinsam aufsetzen
@@ -21,8 +19,6 @@
 
 - **Lektion 4 (Teil 1)**: CAPD initialisieren
   _`clusterctl init` ausführen, erste Ressourcen prüfen_
-
----
 
 ### 🍽️ 13:15–14:50
 
@@ -32,8 +28,6 @@
 - **Lektion 5**: Workload deployen & kubeconfig nutzen
   _Mit kubectl auf das Cluster zugreifen, nginx oder ähnlich deployen_
 
----
-
 ### 🕒 15:10–17:35
 
 - **Lektion 6**: Bausteine und Architektur im Detail
@@ -42,33 +36,27 @@
 - **Offenes Lab & Q&A**  
   _Cluster nochmals erstellen, Debugging, erste Experimente – individuelle Unterstützung_
 
+---
+
 ## 🗓️ Tag 2 – Cluster-Lifecycle, GitOps & Fortgeschrittenes
 
 ### 🕗 08:10–09:45
 
-- **Lektion 6**: Cluster-Lifecycle steuern
-  _Cluster skalieren, upgraden, retten – Reconcile Loops entwirren_
+- **Lektion 8**: Cluster-Lifecycle steuern
+  _Cluster skalieren, upgraden_
 
-- **Lektion 7 (Teil 1)**: GitOps anschliessen
-  _GitOps-Prinzip greifen, Setup mit FluxCD oder ArgoCD_
-
----
+- **Lektion 9**: GitOps einrichten
+  _Argo CD installieren, Git-Repository vorbereiten, Synchronisation konfigurieren_
 
 ### 🕥 10:15–11:50
 
-- **Lektion 7 (Teil 2)**: Cluster mit Git verwalten
-  _Cluster aus Git lesen lassen – alles automatisch per Pull-Model_
-
----
+- **Lektion 10**: Cluster Template mit ClusterClass
+  _ClusterClass definieren, Variables nutzen, Templates für verschiedene Umgebungen_
 
 ### 🍽️ 13:15–14:50
 
-- **Lektion 8**: Recap & Review  
-  _Wiederholung der wichtigsten Bausteine: Architektur, CLI, Lifecycle, GitOps – Was macht CAPI besonders?_
-
----
+- **Lektion 11**: Umsetzung
 
 ### 🕒 15:10–17:35
 
-- **Lektion 9**: Fallbeispiele & Szenarien
-- **Abschluss und Ausblick**: Cluster API Operator, Community & Roadmap
+- **Lektion 12**: Fallbeispiel & Diskussion
