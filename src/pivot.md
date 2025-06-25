@@ -46,7 +46,7 @@ kind create cluster --config=kind-cluster-with-extramounts.yaml
 Installiere Cluster API im Bootstrap-Cluster:
 
 ```bash
-clusterctl init --infrastructure docker
+clusterctl init --infrastructure docker --addon helm
 ```
 
 **Was passiert:** clusterctl installiert alle Cluster API-Controller (Core, Bootstrap, Control Plane) sowie den Docker-Provider (CAPD) in deinen Bootstrap-Cluster.
