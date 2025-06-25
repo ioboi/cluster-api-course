@@ -116,7 +116,10 @@ metadata:
   namespace: default
 spec:
   template:
-    spec: {}
+    spec:
+      extraMounts:
+        - hostPath: /var/run/docker.sock
+          containerPath: /var/run/docker.sock
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
