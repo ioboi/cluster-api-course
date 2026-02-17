@@ -1,0 +1,79 @@
+apiVersion: cluster.x-k8s.io/v1beta2
+kind: Cluster
+metadata:
+  namespace: default
+  name: k0s-example
+spec:
+  controlPlaneRef:
+    apiGroup: controlplane.cluster.x-k8s.io
+    kind: K0smotronControlPlane
+    name: k0s-example
+  infrastructureRef:
+    apiGroup: infrastructure.cluster.x-k8s.io
+    kind: DockerCluster
+    name: k0s-example
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+kind: DockerCluster
+metadata:
+  name: k0s-example
+  namespace: default
+  annotations:
+    cluster.x-k8s.io/managed-by: k0smotron
+spec: {}
+---
+apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+kind: K0smotronControlPlane
+metadata:
+  name: k0s-example
+spec:
+  version: v1.33.7+k0s.0
+  replicas: 1
+  persistence:
+    type: emptyDir
+  service:
+    type: NodePort
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+kind: DockerMachineTemplate
+metadata:
+  namespace: default
+  name: general
+spec:
+  template:
+    spec: {}
+---
+apiVersion: cluster.x-k8s.io/v1beta2
+kind: MachineDeployment
+metadata:
+  name: k0s-example-workers
+  namespace: default
+spec:
+  clusterName: k0s-example
+  selector:
+    matchLabels:
+      cluster: k0s-example
+  template:
+    metadata:
+      labels:
+        cluster: k0s-example
+    spec:
+      clusterName: k0s-example
+      version: v1.33.7+k0s.0
+      bootstrap:
+        configRef:
+          apiGroup: bootstrap.cluster.x-k8s.io
+          kind: K0sWorkerConfig
+          name: k0s-worker
+      infrastructureRef:
+        apiGroup: infrastructure.cluster.x-k8s.io
+        kind: DockerMachineTemplate
+        name: general
+---
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+kind: K0sWorkerConfig
+metadata:
+  name: k0s-worker
+  namespace: default
+spec:
+  version: v1.33.7+k0s.0

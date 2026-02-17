@@ -1,0 +1,96 @@
+# ANCHOR: DockerMachineTemplate
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+kind: DockerMachineTemplate
+metadata:
+  namespace: default
+  name: default-machine-template
+spec:
+  template:
+    spec: {}
+# ANCHOR_END: DockerMachineTemplate
+---
+# ANCHOR: KubeadmControlPlane
+apiVersion: controlplane.cluster.x-k8s.io/v1beta2
+kind: KubeadmControlPlane
+metadata:
+  namespace: default
+  name: example
+spec:
+  version: "1.34.0" # (1)
+  machineTemplate:
+    spec:
+      infrastructureRef: # (2)
+        apiGroup: infrastructure.cluster.x-k8s.io
+        kind: DockerMachineTemplate
+        name: default-machine-template
+  kubeadmConfigSpec:
+    clusterConfiguration:
+      apiServer:
+        certSANs: # (3)
+          - localhost
+          - 127.0.0.1
+          - 0.0.0.0
+# ANCHOR_END: KubeadmControlPlane
+---
+# ANCHOR: DockerCluster
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
+kind: DockerCluster
+metadata:
+  namespace: default
+  name: example
+# ANCHOR_END: DockerCluster
+---
+# ANCHOR: Cluster
+apiVersion: cluster.x-k8s.io/v1beta2
+kind: Cluster
+metadata:
+  namespace: default
+  name: example
+spec:
+  controlPlaneRef: # (1)
+    apiGroup: controlplane.cluster.x-k8s.io
+    kind: KubeadmControlPlane
+    name: example
+  infrastructureRef: # (2)
+    apiGroup: infrastructure.cluster.x-k8s.io
+    kind: DockerCluster
+    name: example
+# ANCHOR_END: Cluster
+---
+# ANCHOR: MachineDeployment
+apiVersion: cluster.x-k8s.io/v1beta2
+kind: MachineDeployment
+metadata:
+  name: example-workers
+  namespace: default
+spec:
+  replicas: 1
+  clusterName: example # (1)
+  selector:
+    matchLabels:
+      cluster: example
+  template:
+    metadata:
+      labels:
+        cluster: example
+    spec:
+      clusterName: example # (1)
+      version: v1.34.0 # (2)
+      bootstrap:
+        configRef: # (3)
+          apiGroup: bootstrap.cluster.x-k8s.io
+          kind: KubeadmConfigTemplate
+          name: worker
+      infrastructureRef: # (4)
+        apiGroup: infrastructure.cluster.x-k8s.io
+        kind: DockerMachineTemplate
+        name: default-machine-template
+# ANCHOR_END: MachineDeployment
+---
+# ANCHOR: KubeadmConfigTemplate
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta2
+kind: KubeadmConfigTemplate
+metadata:
+  name: worker
+  namespace: default
+# ANCHOR_END: KubeadmConfigTemplate
