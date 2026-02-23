@@ -1,7 +1,6 @@
 apiVersion: cluster.x-k8s.io/v1beta2
 kind: Cluster
 metadata:
-  namespace: default
   name: k0s-example
 spec:
   controlPlaneRef:
@@ -17,7 +16,6 @@ apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
 kind: DockerCluster
 metadata:
   name: k0s-example
-  namespace: default
   annotations:
     cluster.x-k8s.io/managed-by: k0smotron
 spec: {}
@@ -27,7 +25,7 @@ kind: K0smotronControlPlane
 metadata:
   name: k0s-example
 spec:
-  version: v1.33.7+k0s.0
+  version: v1.35.1+k0s.0
   replicas: 1
   persistence:
     type: emptyDir
@@ -37,8 +35,7 @@ spec:
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
 kind: DockerMachineTemplate
 metadata:
-  namespace: default
-  name: general
+  name: default
 spec:
   template:
     spec: {}
@@ -47,7 +44,6 @@ apiVersion: cluster.x-k8s.io/v1beta2
 kind: MachineDeployment
 metadata:
   name: k0s-example-workers
-  namespace: default
 spec:
   clusterName: k0s-example
   selector:
@@ -59,7 +55,7 @@ spec:
         cluster: k0s-example
     spec:
       clusterName: k0s-example
-      version: v1.33.7+k0s.0
+      version: v1.35.1 # This version is used by CAPD to create "node" containers using the image kindest/node.
       bootstrap:
         configRef:
           apiGroup: bootstrap.cluster.x-k8s.io
@@ -68,14 +64,13 @@ spec:
       infrastructureRef:
         apiGroup: infrastructure.cluster.x-k8s.io
         kind: DockerMachineTemplate
-        name: general
+        name: default
 ---
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: K0sWorkerConfigTemplate
 metadata:
   name: k0s-worker
-  namespace: default
 spec:
   template:
     spec:
-      version: v1.33.7+k0s.0
+      version: v1.35.1+k0s.0
