@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 cat << EOF | kind create cluster --config=-
+# ANCHOR: KindConfig
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
@@ -10,6 +11,12 @@ nodes:
   extraMounts:
     - hostPath: /var/run/docker.sock
       containerPath: /var/run/docker.sock
+  extraPortMappings:
+  - containerPort: 30443 # (1)
+    hostPort: 30443
+  - containerPort: 30132 # (2)
+    hostPort: 30132
+# ANCHOR_END: KindConfig
 EOF
 
 kubectl apply -f https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.yaml

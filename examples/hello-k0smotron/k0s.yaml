@@ -1,3 +1,4 @@
+# ANCHOR: Cluster
 apiVersion: cluster.x-k8s.io/v1beta2
 kind: Cluster
 metadata:
@@ -11,27 +12,33 @@ spec:
     apiGroup: infrastructure.cluster.x-k8s.io
     kind: DockerCluster
     name: k0s-example
+# ANCHOR_END: Cluster
 ---
+# ANCHOR: DockerCluster
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
 kind: DockerCluster
 metadata:
   name: k0s-example
   annotations:
-    cluster.x-k8s.io/managed-by: k0smotron
+    cluster.x-k8s.io/managed-by: k0smotron # (1)
 spec: {}
+# ANCHOR_END: DockerCluster
 ---
+# ANCHOR: K0smotronControlPlane
 apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: K0smotronControlPlane
 metadata:
   name: k0s-example
 spec:
-  version: v1.35.1+k0s.0
+  version: v1.35.1+k0s.0 # (1)
   replicas: 1
   persistence:
-    type: emptyDir
+    type: emptyDir # (2)
   service:
-    type: NodePort
+    type: NodePort # (3)
+# ANCHOR_END: K0smotronControlPlane
 ---
+# ANCHOR: DockerMachineTemplate
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
 kind: DockerMachineTemplate
 metadata:
@@ -39,12 +46,15 @@ metadata:
 spec:
   template:
     spec: {}
+# ANCHOR_END: DockerMachineTemplate
 ---
+# ANCHOR: MachineDeployment
 apiVersion: cluster.x-k8s.io/v1beta2
 kind: MachineDeployment
 metadata:
   name: k0s-example-workers
 spec:
+  replicas: 1
   clusterName: k0s-example
   selector:
     matchLabels:
@@ -65,7 +75,9 @@ spec:
         apiGroup: infrastructure.cluster.x-k8s.io
         kind: DockerMachineTemplate
         name: default
+# ANCHOR_END: MachineDeployment
 ---
+# ANCHOR: K0sWorkerConfigTemplate
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: K0sWorkerConfigTemplate
 metadata:
@@ -74,3 +86,4 @@ spec:
   template:
     spec:
       version: v1.35.1+k0s.0
+# ANCHOR_END: K0sWorkerConfigTemplate

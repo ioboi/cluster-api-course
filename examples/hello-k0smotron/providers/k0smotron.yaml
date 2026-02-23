@@ -1,9 +1,12 @@
 ---
+# ANCHOR: Namespace
 apiVersion: v1
 kind: Namespace
 metadata:
   name: k0smotron
+# ANCHOR_END: Namespace
 ---
+# ANCHOR: InfrastructureProvider
 apiVersion: operator.cluster.x-k8s.io/v1alpha2
 kind: InfrastructureProvider
 metadata:
@@ -11,7 +14,9 @@ metadata:
   namespace: k0smotron
 spec:
   version: v1.10.3
+# ANCHOR_END: InfrastructureProvider
 ---
+# ANCHOR: BootstrapProvider
 apiVersion: operator.cluster.x-k8s.io/v1alpha2
 kind: BootstrapProvider
 metadata:
@@ -19,7 +24,9 @@ metadata:
   namespace: k0smotron
 spec:
   version: v1.10.3
+# ANCHOR_END: BootstrapProvider
 ---
+# ANCHOR: ControlPlaneProvider
 apiVersion: operator.cluster.x-k8s.io/v1alpha2
 kind: ControlPlaneProvider
 metadata:
@@ -27,3 +34,4 @@ metadata:
   namespace: k0smotron
 spec:
   version: v1.10.3
+# ANCHOR_END: ControlPlaneProvider
